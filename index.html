@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>What If I Call - Cinematic</title>
+<title>What If I Call - Night Experience</title>
 
 <style>
 * {
@@ -14,670 +14,551 @@
 }
 
 body {
-    font-family: Georgia, serif;
     overflow: hidden;
-    background: #11182a;
-    color: white;
+    font-family: Georgia, serif;
+    background: #080e1d;
 }
-
-/* ===== CINEMATIC SKY ===== */
 
 .scene {
     position: relative;
-    width: 100%;
+    width: 100vw;
     height: 100vh;
     overflow: hidden;
-    background:
-      linear-gradient(to bottom,
-        #111a32 0%,
-        #293451 35%,
-        #76566b 68%,
-        #d18a72 100%);
+    isolation: isolate;
+    background: linear-gradient(
+        to bottom,
+        #080d20 0%,
+        #111b37 38%,
+        #28354d 72%,
+        #354d3d 100%
+    );
 }
 
-/* Stars */
+/* ===== LANGIT DAN BINTANG ===== */
 
-.stars {
+.sky-stars {
     position: absolute;
     inset: 0;
-}
-
-.star {
-    position: absolute;
-    width: 2px;
-    height: 2px;
-    border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 7px white;
-    animation: twinkle 3s infinite alternate;
+    z-index: 0;
+    background-image:
+        radial-gradient(2px 2px at 8% 12%, white, transparent),
+        radial-gradient(1px 1px at 18% 28%, white, transparent),
+        radial-gradient(2px 2px at 30% 8%, white, transparent),
+        radial-gradient(1px 1px at 42% 18%, white, transparent),
+        radial-gradient(2px 2px at 54% 9%, white, transparent),
+        radial-gradient(1px 1px at 67% 27%, white, transparent),
+        radial-gradient(2px 2px at 83% 12%, white, transparent),
+        radial-gradient(1px 1px at 95% 30%, white, transparent),
+        radial-gradient(1px 1px at 12% 43%, white, transparent),
+        radial-gradient(2px 2px at 45% 35%, white, transparent),
+        radial-gradient(1px 1px at 72% 44%, white, transparent);
+    animation: twinkle 4s ease-in-out infinite alternate;
 }
 
 @keyframes twinkle {
-    from { opacity: .2; }
+    from { opacity: .45; }
     to { opacity: 1; }
 }
 
-/* Moon */
-
+/* Bulan */
 .moon {
     position: absolute;
-    width: 75px;
-    height: 75px;
-    top: 10%;
-    right: 15%;
-    background: #f5e9ce;
+    top: 9%;
+    right: 18%;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
-    box-shadow: 0 0 45px #fff2cf88;
-    animation: moonFloat 7s ease-in-out infinite;
+    background: #fff5d5;
+    box-shadow:
+        0 0 20px #fff2c4,
+        0 0 65px rgba(255,239,195,.35);
+    z-index: 1;
 }
 
-@keyframes moonFloat {
-    50% { transform: translateY(-10px); }
-}
-
-/* ===== CLOUDS ===== */
-
-.cloud {
+.moon::after {
+    content: "";
     position: absolute;
-    width: 150px;
-    height: 30px;
-    background: #ffffff17;
+    top: -10px;
+    left: 24px;
+    width: 78px;
+    height: 78px;
+    background: #111a35;
     border-radius: 50%;
-    filter: blur(10px);
-    animation: cloudMove 45s linear infinite;
 }
 
-.cloud.one {
-    top: 25%;
-    left: -180px;
-}
+/* ===== METEOR: DI BELAKANG GUNUNG ===== */
 
-.cloud.two {
-    top: 40%;
-    left: -250px;
-    animation-delay: -20s;
-}
-
-@keyframes cloudMove {
-    to { transform: translateX(130vw); }
-}
-
-/* ===== LYRICS ===== */
-
-.lyrics {
+#meteorCanvas {
     position: absolute;
-    top: 16%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 85%;
-    text-align: center;
-    z-index: 20;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
     pointer-events: none;
 }
 
-.lyric-line {
-    font-size: clamp(19px, 3vw, 30px);
-    line-height: 1.5;
-    letter-spacing: 1px;
-    color: #fff8ed;
-    text-shadow:
-      0 2px 10px #10101b,
-      0 0 25px #ffffff66;
-    opacity: 0;
-    transition: opacity 1.5s ease;
+/* ===== PEGUNUNGAN ===== */
+
+.mountains {
+    position: absolute;
+    bottom: 27%;
+    left: 0;
+    width: 100%;
+    height: 43%;
+    z-index: 2;
+    filter: brightness(.58);
 }
 
-.lyric-line.show {
-    opacity: 1;
-}
-
-.lyric-line.hide {
-    opacity: 0;
-}
-
-/* ===== GRASS FIELD ===== */
-
-.ground {
+.mountain {
     position: absolute;
     bottom: 0;
-    width: 100%;
-    height: 37%;
-    background:
-      linear-gradient(to bottom,
-       #263c35,
-       #142c26 60%,
-       #0c201c);
-    clip-path: polygon(0 18%, 20% 5%, 45% 17%,
-    70% 4%, 100% 15%, 100% 100%, 0 100%);
+    width: 0;
+    height: 0;
+    border-left: 180px solid transparent;
+    border-right: 180px solid transparent;
+    border-bottom: 260px solid #40536a;
 }
 
-/* Grass */
+.m1 {
+    left: -5%;
+    transform: scale(1.1);
+}
 
+.m2 {
+    left: 22%;
+    transform: scale(1.35);
+    border-bottom-color: #53677b;
+}
+
+.m3 {
+    right: 5%;
+    transform: scale(1.45);
+    border-bottom-color: #354a5d;
+}
+
+.m4 {
+    right: 35%;
+    transform: scale(.9);
+    border-bottom-color: #45596d;
+}
+
+/* Kabut pegunungan */
+.mist {
+    position: absolute;
+    bottom: 27%;
+    width: 100%;
+    height: 100px;
+    z-index: 2;
+    background: linear-gradient(
+        to bottom,
+        transparent,
+        rgba(179,198,206,.12),
+        transparent
+    );
+    filter: blur(15px);
+}
+
+/* ===== BUKIT DAN PADANG RUMPUT ===== */
+
+.hill {
+    position: absolute;
+    left: -15%;
+    bottom: -24%;
+    width: 130%;
+    height: 63%;
+    border-radius: 50% 50% 0 0;
+    background: linear-gradient(
+        145deg,
+        #456b46,
+        #1c382b 80%
+    );
+    z-index: 3;
+}
+
+.hill2 {
+    position: absolute;
+    right: -18%;
+    bottom: -15%;
+    width: 75%;
+    height: 58%;
+    border-radius: 55% 45% 0 0;
+    background: linear-gradient(
+        145deg,
+        #486d43,
+        #1a3226
+    );
+    z-index: 4;
+}
+
+/* Rumput */
 .grass {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 30%;
+    height: 26%;
+    z-index: 5;
+    opacity: .5;
     background: repeating-linear-gradient(
-       95deg,
-       transparent 0 9px,
-       #557052 10px 11px,
-       transparent 12px 20px
+        78deg,
+        transparent 0 8px,
+        rgba(14,42,24,.5) 9px 10px,
+        transparent 11px 17px
     );
-    opacity: .45;
-    animation: grassMove 3s ease-in-out infinite alternate;
 }
 
-@keyframes grassMove {
-    from { transform: skewX(-1deg); }
-    to { transform: skewX(2deg); }
+/* ===== BURUNG MIGRASI ===== */
+
+.bird-flock {
+    position: absolute;
+    top: 23%;
+    left: -220px;
+    width: 220px;
+    height: 90px;
+    z-index: 3;
+    animation: flockMove 30s linear infinite;
 }
 
-/* ===== TREE ===== */
+.bird {
+    position: absolute;
+    width: 42px;
+    height: 25px;
+    animation: birdWing 1.2s ease-in-out infinite;
+}
+
+.bird svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    fill: #080e1b;
+}
+
+.bird:nth-child(1) { left: 0; top: 30px; }
+.bird:nth-child(2) { left: 55px; top: 5px; animation-delay: -.3s; }
+.bird:nth-child(3) { left: 105px; top: 42px; animation-delay: -.6s; }
+.bird:nth-child(4) { left: 155px; top: 15px; animation-delay: -.9s; }
+
+@keyframes flockMove {
+    from { transform: translateX(-100px); }
+    to { transform: translateX(130vw); }
+}
+
+@keyframes birdWing {
+    0%, 100% { transform: translateY(0) scaleY(1); }
+    50% { transform: translateY(-4px) scaleY(.72); }
+}
+
+/* ===== POHON APEL ===== */
 
 .tree {
     position: absolute;
-    bottom: 25%;
-    left: 24%;
-    width: 30px;
-    height: 220px;
-    background: linear-gradient(90deg,#281e1c,#594033,#261b19);
-    transform: rotate(3deg);
-    border-radius: 30%;
-    z-index: 5;
+    right: 8%;
+    bottom: 20%;
+    width: 300px;
+    height: 350px;
+    z-index: 6;
+    filter: brightness(.72);
 }
 
-.branch {
+.trunk {
     position: absolute;
-    width: 100px;
-    height: 12px;
-    background: #493329;
-    top: 45px;
-    left: -50px;
-    transform: rotate(-35deg);
-    border-radius: 50%;
+    bottom: 0;
+    left: 47%;
+    width: 43px;
+    height: 210px;
+    background: linear-gradient(90deg,#392519,#805333);
+    border-radius: 12px;
+    transform: rotate(-5deg);
 }
 
 .leaves {
     position: absolute;
-    width: 240px;
-    height: 125px;
-    top: -65px;
-    left: -105px;
+    top: 0;
+    width: 300px;
+    height: 220px;
     background: radial-gradient(
-       ellipse at 50% 50%,
-       #304b3d 0%,
-       #253b32 60%,
-       #1b302a 100%
+        circle at 35% 35%,
+        #648a48,
+        #25452b 80%
     );
     border-radius: 50%;
-    box-shadow: 15px 10px 20px #101d1a66;
-    animation: leavesMove 4s ease-in-out infinite alternate;
+    box-shadow:
+        -40px 30px 0 -12px #385d32,
+        40px 30px 0 -10px #436c37,
+        0 -20px 0 -5px #547c3e,
+        0 15px 30px rgba(0,0,0,.3);
 }
 
-@keyframes leavesMove {
-    to { transform: rotate(2deg) translateY(3px); }
-}
-
-/* ===== TWO PEOPLE ===== */
-
-.people {
+.apple {
     position: absolute;
-    bottom: 25%;
-    left: 28%;
-    display: flex;
-    align-items: flex-end;
-    gap: 4px;
-    z-index: 8;
+    width: 14px;
+    height: 14px;
+    background: #b92e31;
+    border-radius: 50%;
+    box-shadow: inset -3px -3px 3px #761e20;
+    z-index: 2;
 }
 
-/* silhouettes */
+.a1 { top: 55px; left: 70px; }
+.a2 { top: 110px; left: 205px; }
+.a3 { top: 145px; left: 120px; }
+.a4 { top: 80px; left: 245px; }
 
+/* ===== PASANGAN ===== */
+
+.couple {
+    position: absolute;
+    right: 18%;
+    bottom: 23%;
+    width: 190px;
+    height: 145px;
+    z-index: 7;
+}
+
+/* Laki-laki */
 .person {
-    position: relative;
-    width: 35px;
-    height: 85px;
+    position: absolute;
+    bottom: 0;
+    width: 75px;
+    height: 100px;
+}
+
+.boy {
+    left: 20px;
+}
+
+.girl {
+    right: 18px;
+    transform: rotate(-12deg);
+    transform-origin: bottom center;
 }
 
 .head {
     position: absolute;
-    width: 19px;
-    height: 21px;
+    top: -25px;
+    left: 20px;
+    width: 36px;
+    height: 40px;
     border-radius: 50%;
-    background: #111519;
-    top: 0;
-    left: 7px;
+    background: #ad8064;
 }
 
 .body {
     position: absolute;
-    width: 32px;
-    height: 46px;
-    background: #111519;
-    top: 20px;
-    left: 1px;
-    border-radius: 12px 12px 4px 4px;
+    top: 15px;
+    width: 68px;
+    height: 75px;
+    border-radius: 25px 25px 10px 10px;
 }
 
-.legs {
+.boy .body {
+    background: #23394b;
+}
+
+.girl .body {
+    background: #75434e;
+}
+
+.girl .head {
+    top: -27px;
+    left: 5px;
+    transform: rotate(-20deg);
+}
+
+.girl .head::before {
+    content: "";
     position: absolute;
-    width: 45px;
-    height: 9px;
-    background: #111519;
-    top: 63px;
-    left: -5px;
+    width: 44px;
+    height: 47px;
+    background: #231b1a;
     border-radius: 50%;
+    top: -7px;
+    left: -5px;
+    z-index: -1;
 }
 
-.person.girl {
-    transform: scale(.92);
-}
-
-/* ===== BIRDS ===== */
-
-.birds {
+/* Kaki */
+.person::after {
+    content: "";
     position: absolute;
-    top: 22%;
-    left: -100px;
-    font-size: 23px;
-    letter-spacing: 8px;
-    color: #141c2b;
-    animation: birdsFly 25s linear infinite;
-    z-index: 4;
+    bottom: -9px;
+    left: -12px;
+    width: 90px;
+    height: 17px;
+    border-radius: 50%;
+    background: #17231e;
 }
 
-@keyframes birdsFly {
-    from { left: -120px; transform: translateY(0); }
-    50% { transform: translateY(-25px); }
-    to { left: 110%; transform: translateY(5px); }
-}
-
-/* ===== AIRPLANE ===== */
-
-.plane {
+/* Tangan berpegangan */
+.hands {
     position: absolute;
-    top: 35%;
-    left: -100px;
-    font-size: 27px;
-    animation: planeFly 35s linear infinite;
-    animation-delay: -8s;
-    z-index: 3;
+    top: 62px;
+    left: 77px;
+    width: 42px;
+    height: 9px;
+    border-radius: 10px;
+    background: #ad8064;
+    transform: rotate(-10deg);
+    z-index: 8;
 }
 
-@keyframes planeFly {
-    to {
-        left: 115%;
-        transform: translateY(-30px);
-    }
-}
-
-/* ===== SHOOTING STAR ===== */
-
-.shooting {
+/* Love */
+.heart {
     position: absolute;
-    top: 18%;
-    left: 70%;
-    width: 100px;
-    height: 2px;
-    background: linear-gradient(to right,
-      white, transparent);
-    transform: rotate(-35deg);
+    color: #ff8aa7;
+    font-size: 20px;
+    text-shadow: 0 0 12px #ff547d;
+    z-index: 8;
+    animation: floatHeart 4s ease-in-out infinite;
+}
+
+.h1 { right: 16%; bottom: 42%; }
+.h2 { right: 25%; bottom: 48%; animation-delay: 1s; }
+.h3 { right: 11%; bottom: 52%; animation-delay: 2s; }
+
+@keyframes floatHeart {
+    0% { transform: translateY(10px) scale(.7); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(-70px) scale(1.2); opacity: 0; }
+}
+
+/* ===== BUNGA ===== */
+
+.flower {
+    position: absolute;
+    bottom: 12%;
+    z-index: 6;
+    filter: brightness(.75);
+    font-size: 22px;
+}
+
+.f1 { left: 40%; }
+.f2 { left: 65%; }
+.f3 { left: 80%; }
+
+/* ===== LIRIK ===== */
+
+.lyric {
+    position: absolute;
+    top: 12%;
+    left: 50%;
+    transform: translate(-50%,20px);
+    width: 85%;
+    text-align: center;
+    color: #fff9e9;
+    font-size: clamp(20px,3vw,34px);
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 12px #a5c8e8, 0 3px 15px #000;
     opacity: 0;
-    animation: shootingStar 8s infinite;
+    z-index: 9;
+    transition: opacity 1.5s ease, transform 1.5s ease;
+    pointer-events: none;
 }
 
-@keyframes shootingStar {
-    0%, 65% { opacity: 0; transform: translate(0,0) rotate(-35deg); }
-    68% { opacity: 1; }
-    78% { opacity: 0; transform: translate(-180px,120px) rotate(-35deg); }
-    100% { opacity: 0; }
+.lyric.show {
+    opacity: 1;
+    transform: translate(-50%,0);
 }
 
 /* ===== MUSIC PLAYER ===== */
 
-.music-card {
+.player {
     position: absolute;
-    bottom: 22px;
-    left: 22px;
+    left: 25px;
+    bottom: 25px;
+    z-index: 12;
     width: 300px;
-    padding: 16px;
-    border: 1px solid #ffffff35;
-    border-radius: 17px;
-    background: #101624aa;
-    backdrop-filter: blur(15px);
-    z-index: 30;
-    box-shadow: 0 8px 35px #0006;
+    padding: 20px;
+    color: white;
+    border: 1px solid rgba(255,255,255,.25);
+    border-radius: 20px;
+    background: rgba(9,19,35,.82);
+    backdrop-filter: blur(12px);
+    box-shadow: 0 10px 35px rgba(0,0,0,.4);
 }
 
-.music-info {
-    display: flex;
-    gap: 13px;
-    align-items: center;
+.player h2 {
+    font-size: 20px;
+    margin-bottom: 5px;
 }
 
-.cover {
-    width: 65px;
-    height: 65px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    background: linear-gradient(135deg,#b68c9e,#334c63,#17232d);
-    display: grid;
-    place-items: center;
-    font-size: 30px;
-    box-shadow: 0 0 20px #d9c4dd44;
-}
-
-.cover.playing {
-    animation: coverGlow 2s infinite alternate;
-}
-
-@keyframes coverGlow {
-    to { box-shadow: 0 0 30px #f2c6ff99; }
-}
-
-.song-title {
-    font-size: 15px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.artist {
-    color: #c9b9c6;
-    font-size: 12px;
-    margin-top: 6px;
+.player p {
+    font-size: 13px;
+    color: #c5d2e2;
+    margin-bottom: 13px;
 }
 
 .controls {
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 25px;
-    margin-top: 15px;
+    gap: 10px;
 }
 
 button {
     border: none;
+    background: #e7d6a5;
+    color: #354632;
+    padding: 10px 22px;
+    border-radius: 30px;
     cursor: pointer;
-    color: white;
-    background: transparent;
-    font-size: 20px;
+    font-weight: bold;
 }
 
-.play {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    background: #e8c6d8;
-    color: #292030;
+button:hover {
+    background: white;
 }
 
-.progress {
+#progress {
     width: 100%;
-    margin-top: 12px;
-    accent-color: #e8c6d8;
-}
-
-input[type="range"] {
-    width: 100%;
+    margin-top: 13px;
+    accent-color: #e7d6a5;
     cursor: pointer;
 }
 
 .time {
     display: flex;
     justify-content: space-between;
-    font-size: 10px;
-    color: #d2c6d2;
+    font-size: 11px;
+    margin-top: 5px;
 }
 
-.volume {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-top: 9px;
-}
-
-.volume input {
-    width: 85px;
-}
-
-.credit {
-    margin-top: 10px;
-    font-size: 9px;
-    text-align: center;
-    letter-spacing: 2px;
-    color: #a99baa;
-}
-
-/* Small decorations */
-
-.fireflies {
-    position: absolute;
-    bottom: 20%;
-    left: 55%;
-    color: #f8d99a;
-    font-size: 12px;
-    animation: firefly 4s infinite alternate;
-}
-
-@keyframes firefly {
-    from { opacity: .1; transform: translateY(0); }
-    to { opacity: 1; transform: translateY(-25px); }
-}
-
-/* Mobile */
+/* ===== RESPONSIVE ===== */
 
 @media(max-width:600px) {
-    .tree {
-        left: 15%;
-        transform: scale(.8);
-        transform-origin: bottom;
-    }
-
-    .people {
-        left: 22%;
-        transform: scale(.8);
-        transform-origin: bottom;
-    }
-
-    .music-card {
+    .player {
         width: 270px;
-        left: 12px;
-        bottom: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 15px;
     }
 
-    .lyrics {
-        top: 15%;
-        width: 92%;
+    .tree {
+        right: -8%;
+        transform: scale(.72);
+        transform-origin: bottom right;
+    }
+
+    .couple {
+        right: 19%;
+        transform: scale(.8);
+        transform-origin: bottom right;
     }
 
     .moon {
-        width: 55px;
-        height: 55px;
-    }
-}
-
-/* =================================
-   CINEMATIC BACKGROUND UPGRADE
-================================= */
-
-/* Efek kamera */
-.scene {
-    animation: cinematicZoom 25s ease-in-out infinite alternate;
-}
-
-@keyframes cinematicZoom {
-    from { transform: scale(1); }
-    to { transform: scale(1.055); }
-}
-
-/* Cahaya horizon */
-.scene::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 23%;
-    width: 100%;
-    height: 35%;
-    background: radial-gradient(
-        ellipse at 50% 100%,
-        #e6a17a55,
-        #bd809333 35%,
-        transparent 75%
-    );
-    pointer-events: none;
-    z-index: 1;
-}
-
-/* Efek vignette seperti film */
-.scene::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(
-        ellipse,
-        transparent 45%,
-        #080c1b44 100%
-    );
-    pointer-events: none;
-    z-index: 25;
-}
-
-/* Bulan lebih bercahaya */
-.moon {
-    box-shadow:
-        0 0 25px #fff3d8aa,
-        0 0 70px #fff0c655,
-        0 0 120px #fff0c622;
-}
-
-/* Pohon lebih natural */
-.tree {
-    height: 235px;
-    width: 32px;
-    box-shadow: 5px 0 12px #080d0b55;
-}
-
-.leaves {
-    width: 260px;
-    height: 145px;
-    left: -115px;
-    background:
-        radial-gradient(ellipse at 30% 35%, #49664c, transparent 38%),
-        radial-gradient(ellipse at 65% 30%, #3e5b43, transparent 40%),
-        radial-gradient(ellipse at 50% 65%, #263f31 0%, #182e27 75%);
-    box-shadow:
-        0 12px 30px #080d0b88,
-        inset 0 -10px 20px #101d17;
-}
-
-/* Dua orang duduk berdampingan */
-.people {
-    bottom: 26%;
-    left: 27%;
-    gap: 9px;
-}
-
-.person {
-    width: 42px;
-    height: 65px;
-}
-
-.head {
-    width: 18px;
-    height: 20px;
-    top: 0;
-    left: 11px;
-}
-
-.body {
-    width: 31px;
-    height: 34px;
-    top: 19px;
-    left: 4px;
-    border-radius: 12px 12px 5px 5px;
-}
-
-/* Kaki dalam posisi duduk */
-.legs {
-    width: 51px;
-    height: 8px;
-    top: 47px;
-    left: -8px;
-    transform: rotate(-7deg);
-    border-radius: 50%;
-}
-
-.person::after {
-    content: "";
-    position: absolute;
-    width: 38px;
-    height: 7px;
-    background: #111519;
-    top: 55px;
-    left: 8px;
-    border-radius: 50%;
-    transform: rotate(12deg);
-}
-
-/* Rumput lebih berlapis */
-.ground {
-    box-shadow: 0 -15px 35px #172d25;
-}
-
-.grass {
-    background: repeating-linear-gradient(
-        95deg,
-        transparent 0 7px,
-        #80916a55 8px 9px,
-        transparent 10px 17px
-    );
-    transform-origin: bottom;
-}
-
-/* Burung lebih halus */
-.birds {
-    font-size: 19px;
-    opacity: .8;
-    animation-duration: 30s;
-}
-
-/* Pesawat lebih lembut */
-.plane {
-    opacity: .75;
-    font-size: 23px;
-}
-
-/* Kunang-kunang tambahan */
-.fireflies {
-    animation: firefly 3s ease-in-out infinite alternate;
-    text-shadow: 0 0 12px #ffe6a5;
-}
-
-/* Cahaya bintang lebih lembut */
-.star {
-    box-shadow: 0 0 5px #ffffffaa;
-}
-
-/* Responsif */
-@media(max-width:600px) {
-    .scene {
-        animation-duration: 35s;
+        width: 65px;
+        height: 65px;
     }
 
-    .tree {
-        left: 12%;
+    .mountain {
+        border-left-width: 110px;
+        border-right-width: 110px;
     }
 
-    .people {
-        left: 21%;
-        bottom: 26%;
-    }
-
-    .leaves {
-        width: 220px;
+    .lyric {
+        top: 12%;
+        width: 90%;
     }
 }
-
 </style>
 </head>
 
@@ -685,310 +566,463 @@ input[type="range"] {
 
 <div class="scene">
 
-    <div class="stars" id="stars"></div>
+    <!-- Langit -->
+    <div class="sky-stars"></div>
     <div class="moon"></div>
 
-    <div class="cloud one"></div>
-    <div class="cloud two"></div>
+    <!-- Canvas meteor di belakang pegunungan -->
+    <canvas id="meteorCanvas"></canvas>
 
-    <div class="shooting"></div>
+    <!-- Burung -->
+    <div class="bird-flock">
 
-    <!-- Birds -->
-    <div class="birds">⌁　⌁　⌁</div>
-
-    <!-- Airplane -->
-    <div class="plane">✈</div>
-
-    <!-- Lyrics -->
-    <div class="lyrics">
-        <div class="lyric-line" id="lyric">
+        <div class="bird">
+            <svg viewBox="0 0 50 30">
+                <path d="M2 12 Q12 -2 25 13 Q38 -2 48 12 Q36 8 25 20 Q14 8 2 12Z"/>
+            </svg>
         </div>
+
+        <div class="bird">
+            <svg viewBox="0 0 50 30">
+                <path d="M2 12 Q12 -2 25 13 Q38 -2 48 12 Q36 8 25 20 Q14 8 2 12Z"/>
+            </svg>
+        </div>
+
+        <div class="bird">
+            <svg viewBox="0 0 50 30">
+                <path d="M2 12 Q12 -2 25 13 Q38 -2 48 12 Q36 8 25 20 Q14 8 2 12Z"/>
+            </svg>
+        </div>
+
+        <div class="bird">
+            <svg viewBox="0 0 50 30">
+                <path d="M2 12 Q12 -2 25 13 Q38 -2 48 12 Q36 8 25 20 Q14 8 2 12Z"/>
+            </svg>
+        </div>
+
     </div>
 
-    <!-- Grass -->
-    <div class="ground"></div>
+    <!-- Pegunungan berada di depan meteor -->
+    <div class="mountains">
+        <div class="mountain m1"></div>
+        <div class="mountain m2"></div>
+        <div class="mountain m3"></div>
+        <div class="mountain m4"></div>
+    </div>
+
+    <div class="mist"></div>
+
+    <!-- Padang rumput -->
+    <div class="hill"></div>
+    <div class="hill2"></div>
     <div class="grass"></div>
 
-    <!-- Tree -->
+    <!-- Pohon apel -->
     <div class="tree">
-        <div class="branch"></div>
         <div class="leaves"></div>
+        <div class="trunk"></div>
+        <div class="apple a1"></div>
+        <div class="apple a2"></div>
+        <div class="apple a3"></div>
+        <div class="apple a4"></div>
     </div>
 
-    <!-- Couple -->
-    <div class="people">
+    <!-- Pasangan -->
+    <div class="couple">
+
         <div class="person boy">
             <div class="head"></div>
             <div class="body"></div>
-            <div class="legs"></div>
         </div>
 
         <div class="person girl">
             <div class="head"></div>
             <div class="body"></div>
-            <div class="legs"></div>
         </div>
+
+        <div class="hands"></div>
     </div>
 
-    <div class="fireflies">✦　✧　✦</div>
+    <!-- Hati -->
+    <div class="heart h1">♥</div>
+    <div class="heart h2">♥</div>
+    <div class="heart h3">♥</div>
 
-    <!-- Music Player -->
-    <div class="music-card">
+    <!-- Bunga -->
+    <div class="flower f1">🌼</div>
+    <div class="flower f2">🌸</div>
+    <div class="flower f3">🌼</div>
 
-        <div class="music-info">
-            <div class="cover" id="cover">🌙</div>
+    <!-- Lirik -->
+    <div class="lyric" id="lyric"></div>
 
-            <div>
-                <div class="song-title">What If I Call?</div>
-                <div class="artist">Alex Crichton</div>
-            </div>
-        </div>
-
-        <audio id="audio" src="what-if-i-call.mp3"></audio>
-
-        <div class="progress">
-            <input type="range" id="seek"
-            min="0" max="100" value="0">
-
-            <div class="time">
-                <span id="current">0:00</span>
-                <span id="duration">0:00</span>
-            </div>
-        </div>
+    <!-- Pemutar musik -->
+    <div class="player">
+        <h2>♫ What If I Call?</h2>
+        <p>Music Experience • Night Edition</p>
 
         <div class="controls">
-            <button id="restart">↺</button>
-            <button class="play" id="play">▶</button>
-            <button id="mute">♫</button>
+            <button id="playBtn">▶ PLAY</button>
+            <span id="status">Ready to play</span>
         </div>
 
-        <div class="volume">
-            <span>♪</span>
-            <input type="range" id="volume"
-            min="0" max="1" step="0.01" value="0.7">
+        <input type="range" id="progress"
+        min="0" max="100" value="0">
+
+        <div class="time">
+            <span id="current">0:00</span>
+            <span id="duration">--:--</span>
         </div>
-
-        <div class="credit">A LITTLE MEMORY UNDER THE STARS</div>
-
     </div>
+
+    <audio id="audio" preload="metadata">
+        <source src="what-if-i-call.mp3" type="audio/mpeg">
+    </audio>
+
 </div>
 
 <script>
 
-// ===== STARS =====
+// ==================================
+// METEOR SYSTEM
+// Canvas berada DI BELAKANG gunung
+// ==================================
 
-const stars = document.getElementById("stars");
+const canvas = document.getElementById("meteorCanvas");
+const ctx = canvas.getContext("2d");
 
-for (let i = 0; i < 120; i++) {
-    const star = document.createElement("div");
-    star.className = "star";
-    star.style.left = Math.random() * 100 + "%";
-    star.style.top = Math.random() * 100 + "%";
-    star.style.animationDelay = Math.random() * 4 + "s";
-    star.style.opacity = Math.random();
-    stars.appendChild(star);
+let W, H;
+let meteors = [];
+let spawnTimer = 0;
+
+function resizeCanvas() {
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    W = window.innerWidth;
+    H = window.innerHeight;
+
+    canvas.width = W * dpr;
+    canvas.height = H * dpr;
+
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 }
 
-// ===== MUSIC =====
+window.addEventListener("resize", resizeCanvas);
+resizeCanvas();
+
+function createMeteor() {
+
+    const startX = Math.random() * W;
+    const startY = -20 - Math.random() * 130;
+
+    const angle = (35 + Math.random() * 35)
+        * Math.PI / 180;
+
+    const speed = 5 + Math.random() * 5;
+
+    meteors.push({
+        x: startX,
+        y: startY,
+
+        vx: -Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+
+        length: 100 + Math.random() * 150,
+        width: 1 + Math.random() * 1.5,
+
+        opacity: 0,
+        life: 0,
+        maxLife: 65 + Math.random() * 40,
+
+        color: Math.random() > .5
+            ? "175,215,255"
+            : "255,240,210"
+    });
+}
+
+function drawMeteor(m) {
+
+    const tailX = m.x - m.vx * (m.length / 12);
+    const tailY = m.y - m.vy * (m.length / 12);
+
+    const gradient = ctx.createLinearGradient(
+        m.x, m.y, tailX, tailY
+    );
+
+    gradient.addColorStop(
+        0, `rgba(255,255,255,${m.opacity})`
+    );
+
+    gradient.addColorStop(
+        .2, `rgba(${m.color},${m.opacity * .8})`
+    );
+
+    gradient.addColorStop(
+        1, "rgba(100,150,255,0)"
+    );
+
+    // Ekor mengikuti posisi kepala
+    ctx.beginPath();
+    ctx.moveTo(m.x, m.y);
+    ctx.lineTo(tailX, tailY);
+
+    ctx.strokeStyle = gradient;
+    ctx.lineWidth = m.width;
+    ctx.lineCap = "round";
+
+    ctx.shadowBlur = 12;
+    ctx.shadowColor = "#b8dfff";
+    ctx.stroke();
+
+    // Kepala meteor
+    ctx.beginPath();
+    ctx.arc(m.x, m.y, 2.3, 0, Math.PI * 2);
+
+    ctx.fillStyle =
+        `rgba(255,255,255,${m.opacity})`;
+
+    ctx.shadowBlur = 18;
+    ctx.shadowColor = "#ffffff";
+    ctx.fill();
+
+    ctx.shadowBlur = 0;
+}
+
+function animateMeteors() {
+
+    ctx.clearRect(0, 0, W, H);
+
+    spawnTimer++;
+
+    if (spawnTimer > 75 + Math.random() * 100) {
+        createMeteor();
+        spawnTimer = 0;
+    }
+
+    for (let i = meteors.length - 1; i >= 0; i--) {
+
+        const m = meteors[i];
+
+        m.life++;
+
+        // Akselerasi
+        m.vx *= 1.008;
+        m.vy *= 1.008;
+
+        m.x += m.vx;
+        m.y += m.vy;
+
+        const fadeIn = Math.min(m.life / 8, 1);
+        const fadeOut = Math.min(
+            (m.maxLife - m.life) / 15, 1
+        );
+
+        m.opacity = Math.max(
+            0,
+            Math.min(fadeIn, fadeOut)
+        );
+
+        drawMeteor(m);
+
+        if (
+            m.life >= m.maxLife ||
+            m.x < -250 ||
+            m.y > H + 200
+        ) {
+            meteors.splice(i, 1);
+        }
+    }
+
+    requestAnimationFrame(animateMeteors);
+}
+
+animateMeteors();
+
+
+// ==================================
+// MUSIC PLAYER DAN LIRIK
+// ==================================
 
 const audio = document.getElementById("audio");
-const play = document.getElementById("play");
-const cover = document.getElementById("cover");
-const seek = document.getElementById("seek");
+const playBtn = document.getElementById("playBtn");
 const lyric = document.getElementById("lyric");
+const progress = document.getElementById("progress");
+const statusText = document.getElementById("status");
 
-let lyricTimer = null;
-let lyricIndex = 0;
-let lyricStartTime = 0;
+let activeIndex = -1;
 
-// ===== LYRICS =====
-// Angka duration adalah perkiraan lama tampilan setiap baris.
-// Sesuaikan start/duration berdasarkan audio asli agar tepat.
+// Masukkan lirik milikmu dan waktu kemunculannya.
+// Waktu menggunakan detik dari awal lagu.
 
 const lyrics = [
-    { text: "So what if I call?", duration: 3.2 },
-    { text: "And you pick up the phone?", duration: 3.2 },
-    { text: "And I use this holiday", duration: 3.2 },
-    { text: "To make my way to your ghost", duration: 3.5 },
-
-    { text: "You walked in the party, your coat was untied", duration: 4.5 },
-    { text: "Slammin' the door 'cause it's colder outside", duration: 4.5 },
-    { text: "Now I won't forget that moment like the blink of an eye", duration: 4.8 },
-    { text: "You're off to the beach now 'til the weather gets nice", duration: 4.5 },
-
-    { text: "But what if I call?", duration: 3.2 },
-    { text: "And you pick up the phone?", duration: 3.2 },
-    { text: "And I use this holiday to make my way to your ghost", duration: 4.5 },
-
-    { text: "But, what if you're lonely?", duration: 3.2 },
-    { text: "And you know I am too?", duration: 3.2 },
-    { text: "And I get the chance to say", duration: 3.2 },
-    { text: "\"I wish I didn't, but I miss you\"", duration: 4.5 },
-
-    { text: "I miss you", duration: 2.8 },
-    { text: "You know it's true", duration: 2.8 },
-    { text: "Yeah, I miss you", duration: 2.8 },
-    { text: "You know it's true", duration: 3.2 },
-
-    { text: "So, what if I call?", duration: 3.2 },
-    { text: "And you pick up the phone?", duration: 3.2 },
-    { text: "And I use this holiday to make my way to your ghost", duration: 4.5 },
-
-    { text: "But, what if you're lonely?", duration: 3.2 },
-    { text: "And you know I am too?", duration: 3.2 },
-    { text: "And I get the chance to say", duration: 3.2 },
-    { text: "\"I wish I didn't, but I miss you\"", duration: 4.5 },
-    { text: "I miss you", duration: 4 }
+    {time:3, text:"So what if I call?"},
+    {time:7, text:"And you pick up the phone?"},
+    {time:11, text:"And I use this holiday"},
+    {time:14, text:"To make my way to your ghost"},
+    {time:23, text:"You walked in the party, your coat was untied"},
+    {time:33, text:"Slammin' the door 'cause it's colder outside"},
+    {time:41, text:"Now I won't forget that moment like the blink of an eye"},
+    {time:51, text:"You're off to the beach now 'til the weather gets nice"},
+    {time:58, text:"But what if I call?"},
+    {time:62, text:"And you pick up the phone?"},
+    {time:67, text:"And I use this holiday"},
+    {time:70, text:"to make my way to your ghost"},
+    {time:76, text:"Oh, what if you're lonely?"},
+    {time:80, text:"And you know I am too?"},
+    {time:85, text:"And I get the chance to say"},
+    {time:88, text:"I wish I didn't, but I miss you"},
+    {time:94, text:"I miss you"},
+    {time:99, text:"You know it's true"},
+    {time:104, text:"Yeah, I miss you"},
+    {time:108, text:"You know it's true"},
+    {time:113, text:"So, what if I call?"},
+    {time:117, text:"And you pick up the phone?"},
+    {time:122, text:"And I use this holiday"},
+    {time:125, text:"to make my way to your ghost"},
+    {time:131, text:"But, what if you're lonely?"},
+    {time:136, text:"And you know I am too?"},
+    {time:140, text:"And I get the chance to say"},
+    {time:144, text:"I wish I didn't, but I miss you"},
+    {time:149, text:"I miss you"},
 ];
 
-// ===== LYRIC ANIMATION =====
+const lyricDuration = 3.5;
 
-function showLyric() {
+function updateLyrics() {
+
     if (audio.paused) return;
 
-    if (lyricIndex >= lyrics.length) {
-        lyric.textContent = "";
-        lyric.className = "lyric-line";
-        return;
+    const now = audio.currentTime;
+
+    let index = -1;
+
+    for (let i = 0; i < lyrics.length; i++) {
+
+        if (
+            now >= lyrics[i].time &&
+            now < lyrics[i].time + lyricDuration
+        ) {
+            index = i;
+            break;
+        }
     }
 
-    const item = lyrics[lyricIndex];
+    if (index !== activeIndex) {
 
-    lyric.textContent = item.text;
-
-    lyric.className = "lyric-line";
-    
-    requestAnimationFrame(() => {
-        lyric.classList.add("show");
-    });
-
-    lyricTimer = setTimeout(() => {
-
+        activeIndex = index;
         lyric.classList.remove("show");
-        lyric.classList.add("hide");
 
-        lyricTimer = setTimeout(() => {
-            lyricIndex++;
-            showLyric();
-        }, 1500);
+        if (index >= 0) {
 
-    }, item.duration * 1000);
-}
+            setTimeout(() => {
 
-function startLyrics() {
-    stopLyrics();
+                if (
+                    !audio.paused &&
+                    activeIndex === index
+                ) {
+                    lyric.textContent = lyrics[index].text;
+                    lyric.classList.add("show");
+                }
 
-    // Delay awal 3 detik
-    lyricStartTime = setTimeout(() => {
-        if (!audio.paused) {
-            showLyric();
+            }, 150);
+
         }
-    }, 3000);
+    }
+
+    requestAnimationFrame(updateLyrics);
 }
 
-function stopLyrics() {
-    clearTimeout(lyricStartTime);
-    clearTimeout(lyricTimer);
-
-    lyric.className = "lyric-line";
-    lyric.textContent = "";
-}
-
-// ===== PLAY PAUSE =====
-
-play.addEventListener("click", async () => {
+// Play dan Pause
+playBtn.addEventListener("click", async () => {
 
     if (audio.paused) {
+
         try {
+
             await audio.play();
+
+            playBtn.textContent = "❚❚ PAUSE";
+            statusText.textContent = "Now Playing";
+
+            activeIndex = -1;
+            lyric.classList.remove("show");
+
+            requestAnimationFrame(updateLyrics);
+
         } catch (error) {
-            alert("File MP3 belum ditemukan!");
+
+            statusText.textContent =
+                "Audio tidak ditemukan";
+
         }
+
     } else {
+
         audio.pause();
+
+        playBtn.textContent = "▶ PLAY";
+        statusText.textContent = "Paused";
+
+        lyric.classList.remove("show");
     }
-
 });
 
-audio.addEventListener("play", () => {
-    play.textContent = "Ⅱ";
-    cover.classList.add("playing");
-
-    startLyrics();
-});
-
-audio.addEventListener("pause", () => {
-    play.textContent = "▶";
-    cover.classList.remove("playing");
-
-    stopLyrics();
-});
-
-audio.addEventListener("ended", () => {
-    stopLyrics();
-    play.textContent = "▶";
-    lyricIndex = 0;
-});
-
-// ===== TIME =====
-
-function formatTime(seconds) {
-    if (!Number.isFinite(seconds)) return "0:00";
-
-    const min = Math.floor(seconds / 60);
-    const sec = Math.floor(seconds % 60);
-
-    return min + ":" + String(sec).padStart(2, "0");
-}
-
-audio.addEventListener("loadedmetadata", () => {
-    document.getElementById("duration").textContent =
-        formatTime(audio.duration);
-});
-
+// Progress lagu
 audio.addEventListener("timeupdate", () => {
+
     if (audio.duration) {
-        seek.value = audio.currentTime / audio.duration * 100;
+
+        progress.value =
+            (audio.currentTime / audio.duration) * 100;
 
         document.getElementById("current").textContent =
             formatTime(audio.currentTime);
     }
 });
 
-seek.addEventListener("input", () => {
+progress.addEventListener("input", () => {
+
     if (audio.duration) {
-        audio.currentTime = seek.value / 100 * audio.duration;
+
+        audio.currentTime =
+            (progress.value / 100) * audio.duration;
+
+        activeIndex = -1;
+        lyric.classList.remove("show");
+
+        if (!audio.paused) {
+            requestAnimationFrame(updateLyrics);
+        }
     }
 });
 
-// Restart
+audio.addEventListener("loadedmetadata", () => {
 
-document.getElementById("restart").onclick = () => {
-    audio.currentTime = 0;
-    lyricIndex = 0;
+    document.getElementById("duration").textContent =
+        formatTime(audio.duration);
+});
 
-    if (!audio.paused) {
-        startLyrics();
-    }
-};
+audio.addEventListener("ended", () => {
 
-// Volume
+    playBtn.textContent = "▶ PLAY";
+    statusText.textContent = "Music Finished";
 
-document.getElementById("volume").oninput = (e) => {
-    audio.volume = e.target.value;
-};
+    lyric.classList.remove("show");
+    activeIndex = -1;
+    progress.value = 0;
+});
 
-// Mute
+function formatTime(seconds) {
 
-document.getElementById("mute").onclick = () => {
-    audio.muted = !audio.muted;
-    document.getElementById("mute").textContent =
-        audio.muted ? "×" : "♫";
-};
+    if (!Number.isFinite(seconds)) return "0:00";
+
+    const min = Math.floor(seconds / 60);
+    const sec = Math.floor(seconds % 60);
+
+    return min + ":" + String(sec).padStart(2,"0");
+}
 
 </script>
 
 </body>
 </html>
-
-
